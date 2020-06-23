@@ -29,10 +29,7 @@ void print_sudoku()
     }
 }
 
-//function to check if all cells are assigned or not
-//if there is any unassigned cell
-//then this function will change the values of
-//row and col accordingly
+
 int number_unassigned(int *row, int *col)
 {
     int num_unassign = 0;
@@ -56,8 +53,7 @@ int number_unassigned(int *row, int *col)
     return num_unassign;
 }
 
-//function to check if we can put a
-//value in a paticular cell or not
+
 int is_safe(int n, int r, int c)
 {
     int i,j;
@@ -89,30 +85,26 @@ int is_safe(int n, int r, int c)
     return 1;
 }
 
-//function to solve sudoku
-//using backtracking
+
 int solve_sudoku()
 {
     int row;
     int col;
-    //if all cells are assigned then the sudoku is already solved
-    //pass by reference because number_unassigned will change the values of row and col
+    
     if(number_unassigned(&row, &col) == 0)
         return 1;
     int n,i;
-    //number between 1 to 9
+
     for(i=1;i<=SIZE;i++)
     {
-        //if we can assign i to the cell or not
-        //the cell is matrix[row][col]
+       
         if(is_safe(i, row, col))
         {
             matrix[row][col] = i;
             //backtracking
             if(solve_sudoku())
                 return 1;
-            //if we can't proceed with this solution
-            //reassign the cell
+         
             matrix[row][col]=0;
         }
     }
